@@ -1,17 +1,42 @@
 # -*- mode: python ; coding: utf-8 -*-
 
-# Add imports for handling package metadata
+import sys
+import os
 from PyInstaller.utils.hooks import copy_metadata
 
 # Collect metadata for required packages
 datas = copy_metadata('readchar') + copy_metadata('inquirer')
+
+# Add ZBar DLLs for Windows
+binaries = []
+if sys.platform == 'win32':
+    # Try to find ZBar installation
+    possible_paths = [
+        r'C:\ProgramData\chocolatey\lib\zbar\tools',
+        r'C:\tools\zbar\bin',
+        r'C:\Program Files\ZBar\bin',
+        r'C:\Program Files (x86)\ZBar\bin'
+    ]
+    
+    zbar_found = False
+    for path in possible_paths:
+        if os.path.exists(path):
+            # Include all DLLs from ZBar directory
+            binaries += [(os.path.join(path, '*.dll'), '.')]
+            zbar_found = True
+            print(f"Found ZBar at: {path}")
+            break
+    
+    if not zbar_found:
+        print("WARNING: ZBar DLLs not found. The executable may not work properly.")
+        print("Please ensure ZBar is installed via: choco install zbar")
 
 block_cipher = None
 
 a = Analysis(
     ['main.py'],
     pathex=[],
-    binaries=[],
+    binaries=binaries,  # Include the ZBar DLLs
     datas=datas,
     hiddenimports=[
         'pyzbar', 
