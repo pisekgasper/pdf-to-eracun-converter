@@ -4,39 +4,71 @@ This Python application extracts data from a PDF invoice containing a 'slikaj in
 
 ## Prerequisites
 
-Before you begin, ensure you have the following installed:
+Before you begin, ensure you have the following installed on your system:
 
-- Python 3.6+
-- pip (Python package installer)
-- zbar (a software suite for reading bar codes)
+- **Python 3.6+**
+- **pip** (Python package installer)
+- **ZBar** (a software suite for reading bar codes)
+- **PyInstaller** (for building standalone executables)
 
 ## Installation
 
-1.  **Clone the repository:**
+Choose the instructions for your operating system:
 
-    ```bash
-    git clone https://github.com/your-username/pdf-to-eslog-converter.git
-    cd pdf-to-eslog-converter
-    ```
+### macOS
 
-2.  **Install the required libraries:**
+1. Install [Homebrew](https://brew.sh/) if you don't have it already.
+2. Install ZBar:
+   ```bash
+   brew install zbar
+   ```
+3. Install Python dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Install PyInstaller (if not already installed):
+   ```bash
+   pip install pyinstaller
+   ```
 
-    On Debian/Ubuntu, you may need to install the `zbar` library first:
+### Debian / Ubuntu
 
-    ```bash
-    sudo apt-get update
-    sudo apt-get install libzbar0
-    ```
+1. Update package lists and install ZBar:
+   ```bash
+   sudo apt-get update
+   sudo apt-get install libzbar0
+   ```
+2. Install Python dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Install PyInstaller (if not already installed):
+   ```bash
+   pip install pyinstaller
+   ```
 
-    Then, install the Python dependencies:
+### Windows
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+1. Install Python 3.x from the [official site](https://www.python.org/downloads/windows/) or via [Microsoft Store]. Ensure you check the box to add Python to your PATH.
+2. Open PowerShell or CMD as Administrator.
+3. Install ZBar:
+   - Using [Chocolatey](https://chocolatey.org/):
+     ```powershell
+     choco install zbar
+     ```
+   - Or download the ZBar Windows installer from the [ZBar project page](https://github.com/mchehab/zbar/releases) and follow the setup prompts.
+4. Install Python dependencies:
+   ```powershell
+   pip install -r requirements.txt
+   ```
+5. Install PyInstaller:
+   ```powershell
+   pip install pyinstaller
+   ```
 
 ## Usage
 
-To process a PDF invoice, run the `main.py` script. The program will automatically scan the current directory for PDF files and present you with an interactive menu to choose the file you want to convert.
+To process a PDF invoice, run the `main.py` script. The program will automatically scan the application directory for PDF files and present you with an interactive menu to choose the file you want to convert.
 
 ```bash
 python main.py
@@ -73,14 +105,14 @@ Since UPNQR codes do not contain VAT information, the converter handles VAT IDs 
 - If the receiver is "NGEN", the converter automatically uses VAT ID: SI24576239
 - For other receivers, the VAT fields are left empty as this information is not available in the UPNQR format
 
-Note: e-SLOG 2.0 requires VAT information for invoices with standard rated VAT. For full compliance, you may need to manually add VAT information to the generated XML if it's not an NGEN invoice.
+> **Note:** e-SLOG 2.0 requires VAT information for invoices with standard rated VAT. For full compliance, you may need to manually add VAT information to the generated XML if it's not an NGEN invoice.
 
 ## Building a Standalone Executable
 
 You can build a standalone executable using PyInstaller:
 
 ```bash
-pyinstaller main.spec
+pyinstaller --clean --onefile main.spec
 ```
 
-This will create a `dist` directory containing the standalone executable.
+This will create a `dist` directory containing the standalone executable for your current platform.
