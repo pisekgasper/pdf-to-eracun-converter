@@ -1,0 +1,36 @@
+# PyInstaller
+/build/
+/dist/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+pip-selfcheck.json
+.tox/
+.nox/
+.eggs/
+*.egg-info/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test files
+*.pdf
+!example_invoice.pdf
+*.xml
+test_*
+
+# Logs
+*.log

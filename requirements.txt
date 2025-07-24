@@ -1,0 +1,15 @@
+# PDF Processing
+PyMuPDF
+
+# QR Code Processing
+pyzbar
+Pillow
+
+# XML Processing
+lxml
+
+# Interactive prompts
+inquirer
+
+# Optional: For building standalone executable
+pyinstaller
