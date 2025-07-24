@@ -22,13 +22,14 @@ Choose the instructions for your operating system:
    ```bash
    brew install zbar
    ```
-3. Install Python dependencies:
+3. Create virtual environment
+   ```bash
+     python3 -m venv venv
+     source venv/bin/activate
+   ```
+4. Install Python dependencies:
    ```bash
    pip install -r requirements.txt
-   ```
-4. Install PyInstaller (if not already installed):
-   ```bash
-   pip install pyinstaller
    ```
 
 ### Debian / Ubuntu
@@ -42,10 +43,6 @@ Choose the instructions for your operating system:
    ```bash
    pip install -r requirements.txt
    ```
-3. Install PyInstaller (if not already installed):
-   ```bash
-   pip install pyinstaller
-   ```
 
 ### Windows
 
@@ -56,14 +53,14 @@ Choose the instructions for your operating system:
      ```powershell
      choco install zbar
      ```
-   - Or download the ZBar Windows installer from the [ZBar project page](https://github.com/mchehab/zbar/releases) and follow the setup prompts.
-4. Install Python dependencies:
+4. Create virtual environment
+   ```powershell
+   python -m venv venv
+   .\venv\Scripts\Activate.ps1
+   ```
+5. Install Python dependencies:
    ```powershell
    pip install -r requirements.txt
-   ```
-5. Install PyInstaller:
-   ```powershell
-   pip install pyinstaller
    ```
 
 ## Usage
@@ -112,7 +109,7 @@ Since UPNQR codes do not contain VAT information, the converter handles VAT IDs 
 You can build a standalone executable using PyInstaller:
 
 ```bash
-pyinstaller --clean --onefile main.spec
+pyinstaller --clean main.spec
 ```
 
 This will create a `dist` directory containing the standalone executable for your current platform.
